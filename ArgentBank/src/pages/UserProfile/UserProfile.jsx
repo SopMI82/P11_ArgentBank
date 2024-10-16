@@ -1,7 +1,7 @@
 const UserProfile = () => {
     return (
         <div>
-            Profil de l&aposutilisateur
+            Profil de l&apos;utilisateur
         </div>
     );
 };
