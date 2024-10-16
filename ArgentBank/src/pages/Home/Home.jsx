@@ -1,7 +1,9 @@
+import Header from "../../containers/Header/Header";
+
 const Home = () => {
     return (
         <div>
-            Ici mon composant HOME
+            <Header/>
         </div>
     );
 };
