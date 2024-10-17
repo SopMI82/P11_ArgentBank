@@ -1,7 +1,7 @@
 const ErrorBoundary = () => {
     return (
         <div>
-            C&aposest une ERREUR 404 !
+            C&apos;est une ERREUR 404 !
         </div>
     );
 };

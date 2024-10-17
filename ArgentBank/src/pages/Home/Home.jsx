@@ -1,7 +1,11 @@
+import Features from "../../containers/Features/Features";
+import Hero from "../../containers/Hero/Hero";
+
 const Home = () => {
     return (
         <div>
-            Ici mon composant HOME
+            <Hero/>
+            <Features/>
         </div>
     );
 };
