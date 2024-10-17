@@ -1,7 +1,12 @@
+import Form from "../../containers/Form/Form";
+import './Signin.css'
+
 const SignIn = () => {
     return (
         <div>
-            Identification utilisateur
+            <main className="main bg-dark">
+            <Form/>
+            </main>
         </div>
     );
 };
