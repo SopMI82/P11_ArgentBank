@@ -2,8 +2,8 @@
     box-sizing: border-box;
     background-color: white;
     width: 300px;
-    margin: 30px auto;
-    margin-top: 3rem;
+    height: fit-content;
+    margin: 3rem auto;
     padding: 2rem;
 }
 
