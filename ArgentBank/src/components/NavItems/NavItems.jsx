@@ -1,12 +1,15 @@
+import { NavLink } from "react-router-dom";
 import './NavItems.css';
 
 const NavItems = () => {
     return (
         <div>
-            <a className="main-nav-item" href="./sign-in.html">
+            <NavLink
+                to="/signin"
+                className="main-nav-item">
                 <i className="fa fa-user-circle"></i>
-                Sign In
-            </a>
+                <p> Sign In</p>
+            </NavLink>
         </div>
     );
 };

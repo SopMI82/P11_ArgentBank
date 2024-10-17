@@ -1,13 +1,11 @@
-import Footer from "../../containers/Footer/Footer";
-import Header from "../../containers/Header/Header";
+import Features from "../../containers/Features/Features";
 import Hero from "../../containers/Hero/Hero";
 
 const Home = () => {
     return (
         <div>
-            <Header/>
             <Hero/>
-            <Footer/>
+            <Features/>
         </div>
     );
 };
