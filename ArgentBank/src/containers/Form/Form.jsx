@@ -21,7 +21,10 @@ const Form = () => {
                         <input type="checkbox" id="remember-me" />
                         <label htmlFor="remember-me">Remember me</label>
                     </div>
-                    <Button />
+                    <Button
+                        buttonText="Sign In"
+                        buttonClass="sign-in-button"
+                    />
                 </form>
             </section>
         </>
