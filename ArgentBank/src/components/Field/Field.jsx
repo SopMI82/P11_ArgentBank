@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import "./Field.css";
 
 const Field = ({ id, labelText }) => {
 
