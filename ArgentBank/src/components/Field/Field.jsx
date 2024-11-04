@@ -1,0 +1,21 @@
+import PropTypes from "prop-types";
+import "./Field.css";
+
+const Field = ({ id, labelText }) => {
+
+    return (
+        <div>
+            <div className="input-wrapper" /* il faudra ajouter une prop classe modifiable ou non */ >
+                <label htmlFor={id}>{labelText}</label>
+                <input type="text" id={id} />
+            </div>
+        </div>
+    );
+};
+
+export default Field;
+
+Field.propTypes = {
+    id: PropTypes.string.isRequired,
+    labelText: PropTypes.string.isRequired,
+};

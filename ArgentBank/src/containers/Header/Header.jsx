@@ -7,7 +7,11 @@ const Header = () => {
         <div>
             <nav className="main-nav">
                 <NavLogo />
-                <NavItems />
+                <NavItems
+                    navTo={"/signin"}
+                    navIcon={"fa fa-user-circle"}
+                    navText={" Sign In"}
+                />
             </nav>
         </div>
     );
