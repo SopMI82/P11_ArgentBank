@@ -1,11 +1,11 @@
-import Form from "../../containers/Form/Form";
+import FormSignIn from "../../containers/FormSignIn/FormSignIn";
 import './Signin.css'
 
 const SignIn = () => {
     return (
         <div>
             <main className="main bg-dark">
-            <Form/>
+                <FormSignIn />
             </main>
         </div>
     );

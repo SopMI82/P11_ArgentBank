@@ -1,8 +1,8 @@
 import Button from "../../components/Button/Button";
 import Field from "../../components/Field/Field";
-import './Form.css'
+import './FormSignIn.css'
 
-const Form = () => {
+const FormSignIn = () => {
     return (
         <>
             <section className="sign-in-content">
@@ -31,4 +31,4 @@ const Form = () => {
     );
 };
 
-export default Form;
+export default FormSignIn;

@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import './NavItems.css';
 import PropTypes from "prop-types";
 
-const NavItems = ({navTo, navIcon, navText}) => {
+const NavItems = ({navTo, navIcon, navText}) => { /**ajouter une prop display pour définir si un navLink est affiché ou masqué */
     return (
         <div>
             <NavLink

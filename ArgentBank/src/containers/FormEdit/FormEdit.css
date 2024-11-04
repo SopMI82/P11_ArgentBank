@@ -1,0 +1,30 @@
+.edit-content {
+    box-sizing: border-box;
+    background-color: white;
+    width: 300px;
+    height: fit-content;
+    margin: 3rem auto;
+    padding: 2rem;
+}
+
+.sign-in-icon {
+    font-size: 5rem;
+}
+
+.CTA-buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+
+    .save-button,
+    .cancel-button {
+        display: block;
+        padding: 8px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-top: 1rem;
+        border-color: #00bc77;
+        background-color: #00bc77;
+        color: #fff;
+    }
+}

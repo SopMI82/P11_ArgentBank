@@ -1,7 +1,12 @@
+import FormEdit from "../../containers/FormEdit/FormEdit";
+import './UserEdit.css';
+
 const UserEdit = () => {
     return (
         <div>
-            Modification des données de l&apos;utilisateur 
+            <main className="main bg-dark">
+                <FormEdit />
+            </main>
         </div>
     );
 };

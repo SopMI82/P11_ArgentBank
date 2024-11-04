@@ -5,7 +5,7 @@ const Field = ({ id, labelText }) => {
 
     return (
         <div>
-            <div className="input-wrapper">
+            <div className="input-wrapper" /* il faudra ajouter une prop classe modifiable ou non */ >
                 <label htmlFor={id}>{labelText}</label>
                 <input type="text" id={id} />
             </div>
