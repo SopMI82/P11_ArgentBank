@@ -1,8 +1,18 @@
 import Button from "../../components/Button/Button";
 import Field from "../../components/Field/Field";
 import './FormEdit.css'
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux'; // Import du hook useSelector
+
 
 const FormEdit = () => {
+       const { userId } = useSelector((state) => state.auth);
+
+    const navigate = useNavigate();
+
+    const onCancel = () => {
+        navigate(`/user/${userId}`);
+    };
     return (
         <>
             <section className="edit-content">
@@ -29,6 +39,7 @@ const FormEdit = () => {
                     <Button // ce bouton revient à la page user/profile
                         buttonText="Cancel"
                         buttonClass="cancel-button"
+                        onClick={onCancel}
                     />
                     </div>
                 </form>
