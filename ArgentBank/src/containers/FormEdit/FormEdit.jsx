@@ -10,7 +10,7 @@ import { getUserProfile, updateUserName } from "../../redux/features/auth/authSl
 const FormEdit = () => {
 
     const dispatch = useDispatch();
-    const { userId, userProfile, isLoading} = useSelector((state) => state.auth);
+    const { userId, userProfile, isLoading } = useSelector((state) => state.auth);
     const [userName, setUserName] = useState('');
 
     // S'assurer que les données du profil sont chargées au montage
@@ -57,45 +57,45 @@ const FormEdit = () => {
         <>
             <section className="edit-content">
                 <i className="fa fa-user-circle sign-in-icon"></i>
-                <h1>Sign In</h1>
+                <h1>Personnal informations</h1>
                 {isLoading ? ( // Utilisation de isLoading
                     <p>Loading...</p>
                 ) : (
-                <form onSubmit={onSave}>
-                    <Field // ce champ doit faire apparaitre le username et doit être modifiable
-                        id="username"
-                        labelText="User Name"
-                        value={userName}
-                        onChange={handleUserNameChange}
-                    />
-                    <Field //ce champ doit être désactivé, il doit faire apparaitre le prénom lié à l'id
-                        id="FirstName"
-                        labelText="First Name"
-                        value={userProfile?.firstName || ''}
-                        onChange={() => { }} //desactivation du champ
-                        disabled={true}
-                    />
-                    <Field //ce champ doit être désactivé, il doit faire apparaitre le nom lié à l'id
-                        id="LastName"
-                        labelText="Last Name"
-                        value={userProfile?.lastName || ''}
-                        onChange={() => { }} //desactivation du champ
-                        disabled={true}
-                    />
-                    <div className="CTA-buttons">
-                        <Button // ce bouton remplace l'username de la database et renvoie à la page user/profile, attention, le nom doit être remplacé en temps réel dans le header.
-                            buttonText="Save"
-                            buttonClass="save-button"
-                            type="submit"
+                    <form onSubmit={onSave}>
+                        <Field // ce champ doit faire apparaitre le username et doit être modifiable
+                            id="username"
+                            labelText="User Name"
+                            value={userName}
+                            onChange={handleUserNameChange}
                         />
-                        <Button // ce bouton revient à la page user/profile
-                            buttonText="Cancel"
-                            buttonClass="cancel-button"
-                            onClick={onCancel}
-                            type="button"
+                        <Field //ce champ doit être désactivé, il doit faire apparaitre le prénom lié à l'id
+                            id="FirstName"
+                            labelText="First Name"
+                            value={userProfile?.firstName || ''}
+                            onChange={() => { }} //desactivation du champ
+                            disabled={true}
                         />
-                    </div>
-                </form>
+                        <Field //ce champ doit être désactivé, il doit faire apparaitre le nom lié à l'id
+                            id="LastName"
+                            labelText="Last Name"
+                            value={userProfile?.lastName || ''}
+                            onChange={() => { }} //desactivation du champ
+                            disabled={true}
+                        />
+                        <div className="CTA-buttons">
+                            <Button // ce bouton remplace l'username de la database et renvoie à la page user/profile, attention, le nom doit être remplacé en temps réel dans le header.
+                                buttonText="Save"
+                                buttonClass="CTA-button"
+                                type="submit"
+                            />
+                            <Button // ce bouton revient à la page user/profile
+                                buttonText="Cancel"
+                                buttonClass="CTA-button"
+                                onClick={onCancel}
+                                type="button"
+                            />
+                        </div>
+                    </form>
                 )}
             </section>
         </>

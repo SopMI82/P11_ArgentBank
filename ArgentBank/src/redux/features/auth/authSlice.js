@@ -6,6 +6,7 @@ const initialState = {
     isLoading: false,   // pour gérer l'état de chargement
     error: null,         // pour stocker les messages d'erreur
     userProfile: null,  // Nouveau champ pour stocker les infos du profil
+    isAuthenticated: false, // permet de voir si une identification est en cours
 };
 
 // Action asynchrone pour la connexion
@@ -98,7 +99,12 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        // Nous définirons les reducers ici
+        logout: (state) => {
+            state.token = null;
+            state.userId = null;
+            state.userProfile = null;
+            state.isAuthenticated = false;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -110,6 +116,7 @@ const authSlice = createSlice({
                 state.isLoading = false;
                 state.token = action.payload.body.token;
                 state.error = null;
+                state.isAuthenticated = true; // Mettre à jour l'état d'authentification
                 console.log("Token stocké:", action.payload.body.token); // Pour déboguer
             })
             .addCase(loginUser.rejected, (state, action) => {
@@ -126,6 +133,7 @@ const authSlice = createSlice({
                 state.userProfile = action.payload.body;
                 state.userId = action.payload.body.id;
                 state.error = null;
+                state.isAuthenticated = true; // Confirmer l'état d'authentification
             })
             .addCase(getUserProfile.rejected, (state, action) => {
                 state.isLoading = false;
@@ -151,5 +159,11 @@ const authSlice = createSlice({
             });
     }
 });
+
+export const { logout } = authSlice.actions;
+
+// Sélecteurs pour faciliter l'accès aux données
+export const selectIsAuthenticated = (state) => state.auth.isAuthenticated;
+export const selectUserName = (state) => state.auth.userProfile?.userName;
 
 export default authSlice.reducer;

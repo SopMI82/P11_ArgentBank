@@ -36,7 +36,7 @@ const FormSignIn = () => {
             if (result.status === 200) {
                 // Deuxième étape : récupération du profil
                 const profileResult = await dispatch(getUserProfile()).unwrap();
-                
+
                 if (profileResult.status === 200) {
                     // Maintenant on a l'ID, on peut rediriger
                     const userId = profileResult.body.id;
@@ -74,7 +74,7 @@ const FormSignIn = () => {
                     </div>
                     <Button
                         buttonText="Sign In"
-                        buttonClass="sign-in-button"
+                        buttonClass="CTA-button"
                     />
                     {isLoading && <div>Loading...</div>}
                     {error && <div className="error">{error}</div>}
