@@ -13,6 +13,12 @@ const FormEdit = () => {
     const onCancel = () => {
         navigate(`/user/${userId}`);
     };
+
+    const onSave = () => {
+        //ici on doit enregistrer la nouvelle valeur de userName dans le state avant de rediriger l'utilisateur sur la page profil (où in devraivoir "Welcome back {new userName} !")
+        navigate(`/user/${userId}`);
+    };
+
     return (
         <>
             <section className="edit-content">
@@ -35,6 +41,7 @@ const FormEdit = () => {
                     <Button // ce bouton remplace l'username de la database et renvoie à la page user/profile, attention, le nom doit être remplacé en temps réel dans le header.
                         buttonText="Save"
                         buttonClass="save-button"
+                        onClick={onSave}
                     />
                     <Button // ce bouton revient à la page user/profile
                         buttonText="Cancel"
