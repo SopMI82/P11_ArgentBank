@@ -64,6 +64,36 @@ export const getUserProfile = createAsyncThunk(
     }
 );
 
+// action assynchrone pour la modification du userName :
+
+export const updateUserName = createAsyncThunk(
+    'auth/updateUserName',
+    async ({ userName }, { getState, rejectWithValue }) => {
+        try {
+            const token = getState().auth.token;
+            const response = await fetch(`http://localhost:3001/api/v1/user/profile`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify({ userName }),
+            });
+
+            const data = await response.json();
+            console.log("Réponse update:", data); // Pour déboguer
+
+            if (!response.ok) {
+                return rejectWithValue(data.message || 'Échec de la mise à jour');
+            }
+
+            return data;
+        } catch (error) {
+            return rejectWithValue('Erreur réseau: ' + error.message);
+        }
+    }
+);
+
 const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -78,7 +108,7 @@ const authSlice = createSlice({
             })
             .addCase(loginUser.fulfilled, (state, action) => {
                 state.isLoading = false;
-                state.token = action.payload.body.token;            
+                state.token = action.payload.body.token;
                 state.error = null;
                 console.log("Token stocké:", action.payload.body.token); // Pour déboguer
             })
@@ -91,16 +121,34 @@ const authSlice = createSlice({
                 state.error = null;
             })
             // ajout des cas pour la deuxieme fonction chargée de récupérer les infos utilisateur
-        .addCase(getUserProfile.fulfilled, (state, action) => {
-            state.isLoading = false;
-            state.userProfile = action.payload.body;
-            state.userId = action.payload.body.id;
-            state.error = null;
-        })
-        .addCase(getUserProfile.rejected, (state, action) => {
-            state.isLoading = false;
-            state.error = action.payload;
-        });
+            .addCase(getUserProfile.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.userProfile = action.payload.body;
+                state.userId = action.payload.body.id;
+                state.error = null;
+            })
+            .addCase(getUserProfile.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+            })
+            // ajout du cas concernant la mise a jour du userName
+            .addCase(updateUserName.pending, (state) => {
+                state.isLoading = true;
+                state.error = null;
+            })
+            .addCase(updateUserName.fulfilled, (state, action) => {
+                state.isLoading = false;
+                // Mettre à jour à la fois userProfile et les autres champs pertinents
+                state.userProfile = {
+                    ...state.userProfile,
+                    userName: action.payload.body.userName
+                };
+                state.error = null;
+            })
+            .addCase(updateUserName.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+            });
     }
 });
 

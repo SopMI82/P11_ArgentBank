@@ -1,16 +1,23 @@
 import "./UserProfile.css";
-import { useSelector } from 'react-redux'; // Import du hook useSelector
+import { useDispatch, useSelector } from 'react-redux'; // Import du hook useSelector
 import { useNavigate } from 'react-router-dom';
 import Button from "../../components/Button/Button";
 import AccountOverview from "../../containers/AccountOverview/AccountOverview";
+import { useEffect } from 'react';
+import { getUserProfile} from "../../redux/features/auth/authSlice";
 
 const UserProfile = () => {
+
+    const dispatch = useDispatch();
 
     // Récupération des données utilisateur depuis le store Redux
     const { userProfile } = useSelector((state) => state.auth);
 
+    useEffect(() => {
+        dispatch(getUserProfile());
+    }, [dispatch]);
+
     // Destructuring des données utilisateur
-    const { userName } = userProfile || { userName:'' };
     const { userId } = useSelector((state) => state.auth);
 
     const navigate = useNavigate();
@@ -23,7 +30,7 @@ const UserProfile = () => {
         <div>
             <main className="main bg-dark">
                 <div className="header">
-                    <h1>Welcome back<br />{userName} !</h1>
+                    <h1>Welcome back<br />{userProfile?.userName} !</h1>
                     <Button
                         buttonText="Edit Name"
                         buttonClass="edit-button"

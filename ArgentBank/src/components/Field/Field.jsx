@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import "./Field.css";
 
-const Field = ({ id, labelText, value, onChange, type = "text" }) => {
+const Field = ({ id, labelText, value, onChange, type = "text", disabled }) => {
 
     return (
         <div>
@@ -11,7 +11,8 @@ const Field = ({ id, labelText, value, onChange, type = "text" }) => {
                     type={type}
                     id={id}
                     value={value}
-                    onChange={onChange} />
+                    onChange={onChange}
+                    disabled={disabled} />
             </div>
         </div>
     );
@@ -25,5 +26,5 @@ Field.propTypes = {
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     type: PropTypes.string,
-
+    disabled: PropTypes.bool,
 };
