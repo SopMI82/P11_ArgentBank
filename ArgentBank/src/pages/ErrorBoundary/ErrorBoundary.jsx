@@ -1,7 +1,18 @@
+import { NavLink } from 'react-router-dom';
+import './ErrorBoundary.css'
+
+
+
+
+
 const ErrorBoundary = () => {
+
     return (
         <div>
-            C&apos;est une ERREUR 404 !
+            <main className="main error-box">
+            <span className="error404">404</span>
+            <NavLink navTo="/" className="return-home">Back to Home</NavLink>
+        </main>
         </div>
     );
 };
