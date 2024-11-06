@@ -10,7 +10,7 @@ const FormSignIn = () => {
     const dispatch = useDispatch();
     // Ajout d'une vérification de sécurité avec une valeur par défaut
     const authState = useSelector((state) => state.auth) || {};
-    const { isLoading = false, error = null, token = null } = authState;
+    const { isLoading = false, error = null } = authState;
 
     const navigate = useNavigate();
 

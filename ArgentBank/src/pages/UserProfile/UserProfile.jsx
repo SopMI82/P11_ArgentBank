@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from "../../components/Button/Button";
 import AccountOverview from "../../containers/AccountOverview/AccountOverview";
 import { useEffect } from 'react';
-import { getUserProfile} from "../../redux/features/auth/authSlice";
+import { getUserProfile } from "../../redux/features/auth/authSlice";
 
 const UserProfile = () => {
 
@@ -33,7 +33,7 @@ const UserProfile = () => {
                     <h1>Welcome back<br />{userProfile?.userName} !</h1>
                     <Button
                         buttonText="Edit Name"
-                        buttonClass="edit-button"
+                        buttonClass="CTA-button"
                         onClick={handleEditClick}
                     />
                 </div>

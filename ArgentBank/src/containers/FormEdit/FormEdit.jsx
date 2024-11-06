@@ -40,7 +40,7 @@ const FormEdit = () => {
 
     //ici on doit enregistrer la nouvelle valeur de userName dans le state avant de rediriger l'utilisateur sur la page profil (où in devraivoir "Welcome back {new userName} !")
     const onSave = async (e) => {
-        e.preventDefault(); // Empêcher le rechargement par défaut du formulaire
+        e.preventDefault();
         try {
             const resultAction = await dispatch(updateUserName({ userName })).unwrap();
             if (resultAction) {

@@ -39,3 +39,8 @@ body {
     white-space: nowrap !important;
     /* 3 */
 }
+
+.error{
+    margin: 10px;
+    color: red;
+}
