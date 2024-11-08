@@ -1,10 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import './ErrorBoundary.css'
 
-
-
-
-
 const ErrorBoundary = () => {
 
     return (
