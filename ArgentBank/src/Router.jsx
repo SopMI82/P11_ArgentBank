@@ -7,6 +7,7 @@ import UserProfile from './pages/UserProfile/UserProfile.jsx'
 import UserEdit from './pages/UserEdit/UserEdit.jsx'
 import UserTransactions from './pages/UserTransactions/UserTransactions.jsx'
 import App from './App.jsx'
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.jsx'
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/user/:id",
+        element: <ProtectedRoute/>,
         children: [
           {
             index: true,
