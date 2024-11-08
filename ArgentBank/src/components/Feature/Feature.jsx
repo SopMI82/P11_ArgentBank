@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import "./Feature.css";
 
-const Feature = ({featureIcon, featureIconAlt, featureTitle, featureDetail}) => {
+const Feature = ({ featureIcon, featureIconAlt, featureTitle, featureDetail }) => {
 
     return (
         <div className="feature-item">
@@ -15,8 +15,8 @@ const Feature = ({featureIcon, featureIconAlt, featureTitle, featureDetail}) => 
 export default Feature;
 
 Feature.propTypes = {
-    featureIcon: PropTypes.string.isRequired,      // L'URL de l'icône doit être une chaîne (obligatoire)
-    featureIconAlt: PropTypes.string.isRequired,   // Le texte alternatif doit être une chaîne (obligatoire)
-    featureTitle: PropTypes.string.isRequired,     // Le titre doit être une chaîne (obligatoire)
-    featureDetail: PropTypes.string.isRequired,    // Le détail doit être une chaîne (obligatoire)
+    featureIcon: PropTypes.string.isRequired,
+    featureIconAlt: PropTypes.string.isRequired,
+    featureTitle: PropTypes.string.isRequired,
+    featureDetail: PropTypes.string.isRequired,
 };

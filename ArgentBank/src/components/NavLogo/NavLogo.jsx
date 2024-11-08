@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 import './NavLogo.css';
 
-
 const NavLogo = () => {
     return (
         <div>

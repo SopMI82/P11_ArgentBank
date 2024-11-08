@@ -1,7 +1,7 @@
 import './Button.css';
 import { PropTypes } from 'prop-types';
 
-const Button = ({buttonText, buttonClass, onClick}) => {
+const Button = ({ buttonText, buttonClass, onClick }) => {
     const handleClick = () => {
         if (typeof onClick === 'function') {
             onClick();
@@ -11,7 +11,7 @@ const Button = ({buttonText, buttonClass, onClick}) => {
         <div>
             <button className={buttonClass} onClick={handleClick}>
                 {buttonText}
-                </button>
+            </button>
         </div>
     );
 };

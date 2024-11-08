@@ -13,19 +13,17 @@ const FormEdit = () => {
     const { userId, userProfile, isLoading } = useSelector((state) => state.auth);
     const [userName, setUserName] = useState('');
 
-    // S'assurer que les données du profil sont chargées au montage
+    // S'assurer que les données du profil sont chargées au montage du composant :
     useEffect(() => {
         dispatch(getUserProfile());
     }, [dispatch]);
 
-    // Mettre à jour le userName local quand userProfile change
+    // Mettre à jour le userName quand userProfile change :
     useEffect(() => {
         if (userProfile?.userName) {
             setUserName(userProfile.userName);
         }
     }, [userProfile]);
-
-
 
     const handleUserNameChange = (e) => {
         setUserName(e.target.value);
@@ -37,8 +35,6 @@ const FormEdit = () => {
         navigate(`/user/${userId}`);
     };
 
-
-    //ici on doit enregistrer la nouvelle valeur de userName dans le state avant de rediriger l'utilisateur sur la page profil (où in devraivoir "Welcome back {new userName} !")
     const onSave = async (e) => {
         e.preventDefault();
         try {
@@ -58,37 +54,37 @@ const FormEdit = () => {
             <section className="edit-content">
                 <i className="fa fa-user-circle sign-in-icon"></i>
                 <h1>Personnal informations</h1>
-                {isLoading ? ( // Utilisation de isLoading
+                {isLoading ? (
                     <p>Loading...</p>
                 ) : (
                     <form onSubmit={onSave}>
-                        <Field // ce champ doit faire apparaitre le username et doit être modifiable
+                        <Field
                             id="username"
                             labelText="User Name"
                             value={userName}
                             onChange={handleUserNameChange}
                         />
-                        <Field //ce champ doit être désactivé, il doit faire apparaitre le prénom lié à l'id
+                        <Field
                             id="FirstName"
                             labelText="First Name"
                             value={userProfile?.firstName || ''}
-                            onChange={() => { }} //desactivation du champ
+                            onChange={() => { }}
                             disabled={true}
                         />
-                        <Field //ce champ doit être désactivé, il doit faire apparaitre le nom lié à l'id
+                        <Field
                             id="LastName"
                             labelText="Last Name"
                             value={userProfile?.lastName || ''}
-                            onChange={() => { }} //desactivation du champ
+                            onChange={() => { }}
                             disabled={true}
                         />
                         <div className="CTA-buttons">
-                            <Button // ce bouton remplace l'username de la database et renvoie à la page user/profile, attention, le nom doit être remplacé en temps réel dans le header.
+                            <Button
                                 buttonText="Save"
                                 buttonClass="CTA-button"
                                 type="submit"
                             />
-                            <Button // ce bouton revient à la page user/profile
+                            <Button
                                 buttonText="Cancel"
                                 buttonClass="CTA-button"
                                 onClick={onCancel}

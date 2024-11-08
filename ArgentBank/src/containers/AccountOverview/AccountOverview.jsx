@@ -14,8 +14,10 @@ const AccountOverview = ({ accountTitle, accountAmount, accountAmountDescr }) =>
 
                 <div className="account-content-wrapper cta">
                     <Button
-                        buttonText="View transactions" // ici le bouton devrait afficher "return" sur la page détails, prévoir une condition pour vérifier sur quelle page on se trouve. Ou utiliser le store redux ?
-                        buttonClass="transaction-button" // pareil ici ce bouton va rediriger vers le detail du compte sur la page profile, mais il doit rediriger vers la page profile si on de trouve sur détails. 
+                        buttonText="View transactions"
+                        // ici le bouton devrait afficher "return" sur la page détails, prévoir une condition pour vérifier sur quelle page on se trouve. Ou utiliser le store redux ?
+                        buttonClass="transaction-button"
+                        // pareil ici ce bouton va rediriger vers le detail du compte sur la page profile, mais il doit rediriger vers la page profile si on de trouve sur détails. 
                     />
                 </div>
             </section>

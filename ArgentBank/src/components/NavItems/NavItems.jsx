@@ -3,7 +3,6 @@ import './NavItems.css';
 import PropTypes from "prop-types";
 
 const NavItems = ({ navTo, navIcon, navText, isSpan = false, onClick }) => {
-    /**ajouter une prop display pour définir si un navLink est affiché ou masqué */
 
     const Content = () => (
         <>

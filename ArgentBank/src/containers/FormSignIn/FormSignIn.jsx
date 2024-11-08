@@ -8,7 +8,6 @@ import { loginUser, getUserProfile } from '../../redux/features/auth/authSlice';
 
 const FormSignIn = () => {
     const dispatch = useDispatch();
-    // Ajout d'une vérification de sécurité avec une valeur par défaut
     const authState = useSelector((state) => state.auth) || {};
     const { isLoading = false, error = null } = authState;
 
@@ -29,16 +28,12 @@ const FormSignIn = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Première étape : login pour obtenir le token
             const result = await dispatch(loginUser({ email, password })).unwrap();
-            console.log("Résultat de la connexion:", result); // Pour déboguer
 
             if (result.status === 200) {
-                // Deuxième étape : récupération du profil
                 const profileResult = await dispatch(getUserProfile()).unwrap();
 
                 if (profileResult.status === 200) {
-                    // Maintenant on a l'ID, on peut rediriger
                     const userId = profileResult.body.id;
                     navigate(`/user/${userId}`);
                 }

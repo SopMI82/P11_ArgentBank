@@ -23,7 +23,6 @@ export const loginUser = createAsyncThunk(
             });
 
             const data = await response.json();
-            console.log("Données reçues complètes:", data); // Pour déboguer
 
             if (!response.ok) {
                 return rejectWithValue(data.message || 'Échec de la connexion');
@@ -36,12 +35,11 @@ export const loginUser = createAsyncThunk(
     }
 );
 
-// Ajout d'une nouvelle action asynchrone pour récupérer le profil
+// Action asynchrone pour récupérer le profil
 export const getUserProfile = createAsyncThunk(
     'auth/getUserProfile',
     async (_, { getState, rejectWithValue }) => {
         try {
-            // Récupération du token depuis le state
             const token = getState().auth.token;
 
             const response = await fetch('http://localhost:3001/api/v1/user/profile', {
@@ -66,7 +64,6 @@ export const getUserProfile = createAsyncThunk(
 );
 
 // action assynchrone pour la modification du userName :
-
 export const updateUserName = createAsyncThunk(
     'auth/updateUserName',
     async ({ userName }, { getState, rejectWithValue }) => {
@@ -82,7 +79,6 @@ export const updateUserName = createAsyncThunk(
             });
 
             const data = await response.json();
-            console.log("Réponse update:", data); // Pour déboguer
 
             if (!response.ok) {
                 return rejectWithValue(data.message || 'Échec de la mise à jour');
@@ -117,7 +113,6 @@ const authSlice = createSlice({
                 state.token = action.payload.body.token;
                 state.error = null;
                 state.isAuthenticated = true; // Mettre à jour l'état d'authentification
-                console.log("Token stocké:", action.payload.body.token); // Pour déboguer
             })
             .addCase(loginUser.rejected, (state, action) => {
                 state.isLoading = false;
@@ -127,7 +122,6 @@ const authSlice = createSlice({
                 state.isLoading = true;
                 state.error = null;
             })
-            // ajout des cas pour la deuxieme fonction chargée de récupérer les infos utilisateur
             .addCase(getUserProfile.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.userProfile = action.payload.body;
@@ -139,7 +133,6 @@ const authSlice = createSlice({
                 state.isLoading = false;
                 state.error = action.payload;
             })
-            // ajout du cas concernant la mise a jour du userName
             .addCase(updateUserName.pending, (state) => {
                 state.isLoading = true;
                 state.error = null;
@@ -162,7 +155,6 @@ const authSlice = createSlice({
 
 export const { logout } = authSlice.actions;
 
-// Sélecteurs pour faciliter l'accès aux données
 export const selectIsAuthenticated = (state) => state.auth.isAuthenticated;
 export const selectUserName = (state) => state.auth.userProfile?.userName;
 

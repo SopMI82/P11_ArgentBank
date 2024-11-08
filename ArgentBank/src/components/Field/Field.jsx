@@ -5,7 +5,7 @@ const Field = ({ id, labelText, value, onChange, type = "text", disabled }) => {
 
     return (
         <div>
-            <div className="input-wrapper" /* il faudra ajouter une prop classe modifiable ou non */ >
+            <div className="input-wrapper">
                 <label htmlFor={id}>{labelText}</label>
                 <input
                     type={type}

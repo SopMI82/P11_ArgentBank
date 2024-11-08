@@ -28,16 +28,13 @@ const Header = () => {
                         navText={" Sign In"}
                     />
                 ) : (
-                    // Affichage des éléments pour utilisateur connecté
                     <div className="auth-nav-items">
-                        {/* Span pour afficher le nom d'utilisateur */}
                         <NavItems
                             navTo="#"
                             navIcon="fa fa-user-circle"
                             navText={userName || 'user'}
                             isSpan={true}
                         />
-                        {/* Bouton de déconnexion */}
                         <NavItems
                             navTo="#"
                             navIcon="fa fa-sign-out"
@@ -46,7 +43,6 @@ const Header = () => {
                         />
                     </div>
                 )}
-
             </nav>
         </div>
     );

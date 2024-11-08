@@ -4,8 +4,8 @@ import Hero from "../../containers/Hero/Hero";
 const Home = () => {
     return (
         <div>
-            <Hero/>
-            <Features/>
+            <Hero />
+            <Features />
         </div>
     );
 };
