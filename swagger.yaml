@@ -107,17 +107,17 @@ paths:
         - Bearer: []
       tags:
         - Transaction Module
-      summary: Accounts List
-      description: API to retrieve a user's list of accounts
+      summary: List of user's accounts
+      description: API that displays the list of the logged-in user's accounts
       produces:
         - application/json
       responses:
         '200':
           description: account List Recovery Completed Successfully
           schema:
-            $ref: '#/definitions/Accounts'
+            $ref: '#/definitions/AccountsList'
         '400':
-          description: Invalid Fields
+          description: Failed to recover a list of accounts
         '500':
           description: Internal Server Error
   /accounts/{accountId}/transactions:
@@ -128,67 +128,52 @@ paths:
         - Transaction Module
       summary: Transactions List
       description: API to retrieve the list of transactions from the account according to accountId
+      parameters :
+        - name : accountId
+          in: path
+          description : ID of the clicked account from which to retrieve the last transactions
+          required : true
+          type : string
       produces:
         - application/json
       responses:
         '200':
           description: Successfully retrieved the list of transactions
           schema:
-            $ref: '#/definitions/Transactions'
+            $ref: '#/definitions/TransactionList'
         '400':
-          description: Invalid Fields
+          description: Failed to recover transactions
         '500':
           description: Internal Server Error
-  /categories:
+  /accounts/transactions/{transactionId}:
     put:
       security:
         - Bearer: []
       tags:
         - Transaction Module
-      summary: Change category
-      description: API to change the category of a transaction
+      summary: Change category and note
+      description: API to change the category and comment on the transaction
       parameters:
-        - in: body
-          name: body
-          description: new category Payload
+        - name: transactionId
+          in: path
+          description: ID of the clicked transaction to update
+          required: true
+          type : string
+        - name : newData
+          in : body
+          description: object containing newCategory and newComment
           required: true
           schema:
-            $ref: '#/definitions/NewCategory'
-      #produces:
-        # - application/json
+            $ref: '#/definitions/NewData'
+      produces:
+         - application/json
       responses:
         '200':
-          description: Successfully Modified Transaction Category
+          description: Successfully Modified Datas
           schema:
             $ref: '#/definitions/ApiResponse'
         '400':
-          description: Invalid Fields
-        '500':
-          description: Internal Server Error
-  /notes:
-    put:
-      security:
-        - Bearer: []
-      tags:
-        - Transaction Module
-      summary: Change notes on transaction
-      description: API to change the personal note of a transaction
-      parameters:
-        - in: body
-          name: body
-          description: new comment Payload
-          required: true
-          schema:
-            $ref: '#/definitions/NewComment'
-      #produces:
-        # - application/json
-      responses:
-        '200':
-          description: Successfully Modified Transaction Note
-          schema:
-            $ref: '#/definitions/ApiResponse'
-        '400':
-          description: Invalid Fields
+          description: Data update failed
         '500':
           description: Internal Server Error
 securityDefinitions:
@@ -246,7 +231,11 @@ definitions:
     properties:
       userName:
         type: string
-  Accounts :
+  AccountsList :
+    type : array
+    items :
+      $ref: '#/definitions/Account'
+  Account :
     type : object
     properties : 
       accountId : 
@@ -257,10 +246,17 @@ definitions:
         description : account entitled
       sold :
         type : integer
-      description : actual balance for account
-  Transactions :
+        description : actual balance for account
+  TransactionList :
+      type : array
+      items :
+        $ref: '#/definitions/Transaction'
+  Transaction :
     type : object
-    Properties :
+    properties :
+      id : 
+        type : string
+        description : id of this transaction
       date :
         type : string
         description : date of the transaction
@@ -282,12 +278,11 @@ definitions:
       note :
         type : string
         description : personal note of user
-  NewCategory :
+  NewData :
     properties :
       category :
         type : string
-  NewComment :
-    properties :
+        description : new category selected by user
       note :
         type : string
-
+        description : new comment wroten by user
