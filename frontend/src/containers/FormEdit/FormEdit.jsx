@@ -2,15 +2,14 @@ import Button from "../../components/Button/Button";
 import Field from "../../components/Field/Field";
 import './FormEdit.css'
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'; // Import du hook useSelector
-import { getUserProfile, updateUserName } from "../../redux/features/auth/authSlice";
+import { getUserProfile, setIsOpened, updateUserName } from "../../redux/features/auth/authSlice";
 
 
 const FormEdit = () => {
 
     const dispatch = useDispatch();
-    const { userId, userProfile, isLoading } = useSelector((state) => state.auth);
+    const { userProfile, isLoading } = useSelector((state) => state.auth);
     const [userName, setUserName] = useState('');
 
     // S'assurer que les données du profil sont chargées au montage du composant :
@@ -29,10 +28,9 @@ const FormEdit = () => {
         setUserName(e.target.value);
     };
 
-    const navigate = useNavigate();
 
     const onCancel = () => {
-        navigate(`/user/${userId}`);
+        dispatch(setIsOpened(false));
     };
 
     const onSave = async (e) => {
@@ -42,7 +40,7 @@ const FormEdit = () => {
             if (resultAction) {
                 // Recharger le profil pour s'assurer d'avoir les dernières données
                 await dispatch(getUserProfile());
-                navigate(`/user/${userId}`);
+                dispatch(setIsOpened(false));
             }
         } catch (err) {
             console.error('Échec de la mise à jour:', err);

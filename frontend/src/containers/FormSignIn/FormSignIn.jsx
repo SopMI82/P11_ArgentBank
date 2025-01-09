@@ -34,8 +34,7 @@ const FormSignIn = () => {
                 const profileResult = await dispatch(getUserProfile()).unwrap();
 
                 if (profileResult.status === 200) {
-                    const userId = profileResult.body.id;
-                    navigate(`/user/${userId}`);
+                    navigate(`/user`);
                 }
             }
         } catch (err) {

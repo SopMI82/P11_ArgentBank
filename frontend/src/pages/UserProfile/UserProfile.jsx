@@ -1,10 +1,10 @@
 import "./UserProfile.css";
 import { useDispatch, useSelector } from 'react-redux'; // Import du hook useSelector
-import { useNavigate } from 'react-router-dom';
 import Button from "../../components/Button/Button";
 import AccountOverview from "../../containers/AccountOverview/AccountOverview";
 import { useEffect } from 'react';
-import { getUserProfile } from "../../redux/features/auth/authSlice";
+import { getUserProfile, selectIsOpened, setIsOpened } from "../../redux/features/auth/authSlice";
+import FormEdit from "../../containers/FormEdit/FormEdit";
 
 const UserProfile = () => {
 
@@ -17,25 +17,29 @@ const UserProfile = () => {
         dispatch(getUserProfile());
     }, [dispatch]);
 
-    // Destructuring des données utilisateur
-    const { userId } = useSelector((state) => state.auth);
-
-    const navigate = useNavigate();
-
+    const isOpened = useSelector(selectIsOpened);
+    console.log(isOpened);
+    
     const handleEditClick = () => {
-        navigate(`/user/${userId}/edit`);
+        dispatch(setIsOpened(true)); // bascule vers l'affichage du formulaire
     };
 
     return (
         <div>
             <main className="main bg-dark">
                 <div className="header">
-                    <h1>Welcome back<br />{userProfile?.userName} !</h1>
-                    <Button
+                    <h1>Welcome back<br/>{userProfile?.userName} !</h1>
+                    {!isOpened && (
+                        <Button
                         buttonText="Edit Name"
                         buttonClass="CTA-button"
                         onClick={handleEditClick}
                     />
+                    )}
+                    {isOpened && (
+                        <FormEdit userProfile={userProfile} />
+                    )}
+                    
                 </div>
                 <h2 className="sr-only">Accounts</h2>
                 <AccountOverview

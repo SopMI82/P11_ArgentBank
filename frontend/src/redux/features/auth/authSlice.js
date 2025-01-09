@@ -7,6 +7,7 @@ const initialState = {
     error: null,         // pour stocker les messages d'erreur
     userProfile: null,  // Nouveau champ pour stocker les infos du profil
     isAuthenticated: false, // permet de voir si une identification est en cours
+    isOpened: false, // fait en sorte que le formulaire de modification du username soit fermé par défaut
 };
 
 // Action asynchrone pour la connexion
@@ -100,6 +101,9 @@ const authSlice = createSlice({
             state.userId = null;
             state.userProfile = null;
             state.isAuthenticated = false;
+        },
+        setIsOpened: (state, action) => {
+            state.isOpened = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -153,9 +157,10 @@ const authSlice = createSlice({
     }
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, setIsOpened } = authSlice.actions;
 
 export const selectIsAuthenticated = (state) => state.auth.isAuthenticated;
 export const selectUserName = (state) => state.auth.userProfile?.userName;
+export const selectIsOpened = (state) => state.auth.isOpened;
 
 export default authSlice.reducer;
