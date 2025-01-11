@@ -10,14 +10,12 @@ const FormSignIn = () => {
     const dispatch = useDispatch();
     const authState = useSelector((state) => state.auth) || {};
     const { isLoading = false, error = null } = authState;
-
     const navigate = useNavigate();
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    //const [rememberMe, setRememberMe] = useState(false);
+    const [rememberMe, setRememberMe] = useState(false);
 
-
+     /** Ecouter les changements dans les champs */
     const handleChange = (e) => {
         const { id, value } = e.target;
         if (id === 'email') {
@@ -27,10 +25,12 @@ const FormSignIn = () => {
         }
     };
 
-    //const handleCheckboxChange = (e) => {
-    //    setRememberMe(e.target.checked);
-    //};
+    /** Ecouter le changement sur la checkbox */
+    const handleCheckboxChange = (e) => {
+        setRememberMe(e.target.checked);
+    };
 
+    /** Actions à effectuer au clic sur le bouton de soumission */
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -40,6 +40,11 @@ const FormSignIn = () => {
                 const profileResult = await dispatch(getUserProfile()).unwrap();
 
                 if (profileResult.status === 200) {
+                    if (rememberMe) {
+                        sessionStorage.setItem('token', result.body.token);
+                    } else {
+                        sessionStorage.removeItem('token');
+                    }
                     navigate(`/user`);
                 }
             }
@@ -69,7 +74,11 @@ const FormSignIn = () => {
                         onChange={handleChange}
                     />
                     <div className="input-remember">
-                        <input type="checkbox" id="remember-me" />
+                        <input
+                            type="checkbox"
+                            id="remember-me"
+                            checked={rememberMe}
+                            onChange={handleCheckboxChange}/>
                         <label htmlFor="remember-me">Remember me</label>
                     </div>
                     <Button

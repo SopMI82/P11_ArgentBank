@@ -1,16 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
-    token: null,        // pour stocker le token d'authentification
+    token: sessionStorage.getItem('token') || null,        // si il y a un token dans le local storage on le récupère
     userId: null,    // Ajout de l'ID utilisateur
     isLoading: false,   // pour gérer l'état de chargement
     error: null,         // pour stocker les messages d'erreur
     userProfile: null,  // Nouveau champ pour stocker les infos du profil
-    isAuthenticated: false, // permet de voir si une identification est en cours
+    isAuthenticated: !!sessionStorage.getItem('token'), // permet de voir si une identification est en cours
     isOpened: false, // fait en sorte que le formulaire de modification du username soit fermé par défaut
 };
 
-// Action asynchrone pour la connexion
+/** Action asynchrone pour la connexion*/
 export const loginUser = createAsyncThunk(
     'auth/loginUser',
     async (credentials, { rejectWithValue }) => {
@@ -36,7 +36,7 @@ export const loginUser = createAsyncThunk(
     }
 );
 
-// Action asynchrone pour récupérer le profil
+/** Action asynchrone pour récupérer le profil utilisateur*/
 export const getUserProfile = createAsyncThunk(
     'auth/getUserProfile',
     async (_, { getState, rejectWithValue }) => {
@@ -64,7 +64,7 @@ export const getUserProfile = createAsyncThunk(
     }
 );
 
-// action assynchrone pour la modification du userName :
+/** action assynchrone pour la modification du userName*/
 export const updateUserName = createAsyncThunk(
     'auth/updateUserName',
     async ({ userName }, { getState, rejectWithValue }) => {
@@ -101,6 +101,7 @@ const authSlice = createSlice({
             state.userId = null;
             state.userProfile = null;
             state.isAuthenticated = false;
+            sessionStorage.removeItem('token'); //efface le token du sessionStorage
         },
         setIsOpened: (state, action) => {
             state.isOpened = action.payload;
@@ -161,6 +162,8 @@ export const { logout, setIsOpened } = authSlice.actions;
 
 export const selectIsAuthenticated = (state) => state.auth.isAuthenticated;
 export const selectUserName = (state) => state.auth.userProfile?.userName;
+export const selectToken = (state) => state.auth.token;
+
 export const selectIsOpened = (state) => state.auth.isOpened;
 
 export default authSlice.reducer;

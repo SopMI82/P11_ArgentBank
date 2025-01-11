@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'; // Import du hook useSel
 import Button from "../../components/Button/Button";
 import AccountOverview from "../../containers/AccountOverview/AccountOverview";
 import { useEffect } from 'react';
-import { getUserProfile, selectIsOpened, setIsOpened } from "../../redux/features/auth/authSlice";
+import { getUserProfile, selectIsOpened, selectUserName, setIsOpened } from "../../redux/features/auth/authSlice";
 import FormEdit from "../../containers/FormEdit/FormEdit";
 
 const UserProfile = () => {
 
     const dispatch = useDispatch();
-
+    const userName = useSelector(selectUserName);
+    
     // Récupération des données utilisateur depuis le store Redux
     const { userProfile } = useSelector((state) => state.auth);
 
@@ -27,7 +28,7 @@ const UserProfile = () => {
         <div>
             <main className="main bg-dark">
                 <div className="header">
-                    <h1>Welcome back<br/>{userProfile?.userName} !</h1>
+                    <h1>Welcome back<br/>{userName} !</h1>
                     {!isOpened && (
                         <Button
                         buttonText="Edit Name"
