@@ -18,7 +18,6 @@ const UserProfile = () => {
     }, [dispatch]);
 
     const isOpened = useSelector(selectIsOpened);
-    console.log(isOpened);
     
     const handleEditClick = () => {
         dispatch(setIsOpened(true)); // bascule vers l'affichage du formulaire

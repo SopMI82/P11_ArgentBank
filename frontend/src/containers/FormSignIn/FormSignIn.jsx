@@ -15,6 +15,8 @@ const FormSignIn = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    //const [rememberMe, setRememberMe] = useState(false);
+
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -24,6 +26,10 @@ const FormSignIn = () => {
             setPassword(value);
         }
     };
+
+    //const handleCheckboxChange = (e) => {
+    //    setRememberMe(e.target.checked);
+    //};
 
     const handleSubmit = async (e) => {
         e.preventDefault();

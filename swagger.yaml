@@ -107,8 +107,8 @@ paths:
         - Bearer: []
       tags:
         - Transaction Module
-      summary: List of user's accounts
-      description: API that displays the list of the logged-in user's accounts
+      summary: List of a user's accounts based on user ID
+      description: An API that retrieves a list of a user's accounts based on their user ID and allows them to be displayed on their profile.
       produces:
         - application/json
       responses:
@@ -118,6 +118,10 @@ paths:
             $ref: '#/definitions/AccountsList'
         '400':
           description: Failed to recover a list of accounts
+        '401' :
+          description: Unauthenticated User
+        '404' :
+          description: No accounts to display, content not found
         '500':
           description: Internal Server Error
   /accounts/{accountId}/transactions:
@@ -127,13 +131,27 @@ paths:
       tags:
         - Transaction Module
       summary: Transactions List
-      description: API to retrieve the list of transactions from the account according to accountId
+      description: API that retrieves the current month's transactions based on the bank account id
       parameters :
         - name : accountId
           in: path
           description : ID of the clicked account from which to retrieve the last transactions
           required : true
           type : string
+        - name : month
+          in : query
+          description : The month of the transactions to filter, if not specified, use the current month. Input limited to a number between 1 and 12.
+          required : false
+          type : integer 
+          minimum : 1
+          maximum : 12
+        - name: year
+          in: query
+          description: The year of the transactions to filter, if not specified, use the current year. Entry limited to a number of 4 digits, which must be less than the current year.
+          required: false
+          type: integer
+          pattern : '^\d{4}$'
+          maximum : 2025 # donnée à mettre a jour chaque année. Si possible, faire en sorte qu'il soit actualisé automatiquement.
       produces:
         - application/json
       responses:
@@ -141,8 +159,12 @@ paths:
           description: Successfully retrieved the list of transactions
           schema:
             $ref: '#/definitions/TransactionList'
-        '400':
+        '400':                                                                            
           description: Failed to recover transactions
+        '401' :
+          description: Unauthenticated User
+        '404' :
+          description: No transactions to display, content not found
         '500':
           description: Internal Server Error
   /accounts/transactions/{transactionId}:
@@ -152,7 +174,7 @@ paths:
       tags:
         - Transaction Module
       summary: Change category and note
-      description: API to change the category and comment on the transaction
+      description: Api that allows you to modify the 'note' and 'category' elements on a particular transaction thanks to its ID.
       parameters:
         - name: transactionId
           in: path
@@ -171,9 +193,11 @@ paths:
         '200':
           description: Successfully Modified Datas
           schema:
-            $ref: '#/definitions/ApiResponse'
+            $ref: '#/definitions/DataResponse'
         '400':
           description: Data update failed
+        '401' :
+          description: Unauthenticated User
         '500':
           description: Internal Server Error
 securityDefinitions:
@@ -243,7 +267,7 @@ definitions:
         description : account number
       accountName :
         type : string
-        description : account entitled
+        description : account name
       sold :
         type : integer
         description : actual balance for account
@@ -286,3 +310,19 @@ definitions:
       note :
         type : string
         description : new comment wroten by user
+  DataResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+      message:
+        type: string
+      body:
+        type: object
+        properties:
+          category:
+            description: New category selected by user
+            type: string
+          note:
+            description : New comment added by user
+            type: string
