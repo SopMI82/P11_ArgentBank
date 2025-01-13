@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
-    token: sessionStorage.getItem('token') || null,        // si il y a un token dans le local storage on le récupère
+    token: sessionStorage.getItem('token') || null, // si il y a un token dans le session storage on le récupère
     userId: null,    // Ajout de l'ID utilisateur
     isLoading: false,   // pour gérer l'état de chargement
     error: null,         // pour stocker les messages d'erreur
@@ -163,7 +163,6 @@ export const { logout, setIsOpened } = authSlice.actions;
 export const selectIsAuthenticated = (state) => state.auth.isAuthenticated;
 export const selectUserName = (state) => state.auth.userProfile?.userName;
 export const selectToken = (state) => state.auth.token;
-
 export const selectIsOpened = (state) => state.auth.isOpened;
 
 export default authSlice.reducer;

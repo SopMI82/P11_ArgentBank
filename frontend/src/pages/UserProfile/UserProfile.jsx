@@ -27,7 +27,7 @@ const UserProfile = () => {
     return (
         <div>
             <main className="main bg-dark">
-                <div className="header">
+                <section>
                     <h1>Welcome back<br/>{userName} !</h1>
                     {!isOpened && (
                         <Button
@@ -40,7 +40,8 @@ const UserProfile = () => {
                         <FormEdit userProfile={userProfile} />
                     )}
                     
-                </div>
+                </section>
+                <section>
                 <h2 className="sr-only">Accounts</h2>
                 <AccountOverview
                     accountTitle="Argent Bank Checking (x8349)"
@@ -57,6 +58,7 @@ const UserProfile = () => {
                     accountAmount="$184.30"
                     accountAmountDescr="Current Balance"
                 />
+                </section>
             </main>
         </div>
     );
